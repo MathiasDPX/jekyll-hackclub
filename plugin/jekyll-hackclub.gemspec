@@ -6,7 +6,7 @@ Gem::Specification.new do |spec|
     spec.version = "1.0.0"
     spec.authors = ["MathiasDPX"]
     spec.summary = "Jekyll plugin for HackClub"
-    spec.licensese = ["MIT"]
+    spec.license = ["MIT"]
     
     spec.require_paths= ['lib']
     spec.files = ["lib/jekyll-hackclub.rb"]
