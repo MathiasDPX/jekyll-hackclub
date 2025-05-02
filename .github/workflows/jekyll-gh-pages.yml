@@ -21,7 +21,7 @@ jobs:
     - name: Set up Ruby
       uses: ruby/setup-ruby@v1.237.0
       with:
-        ruby-version: 2.6.10
+        ruby-version: 3.4.3
 
     - name: Install dependencies
       run: |
