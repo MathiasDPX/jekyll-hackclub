@@ -6,11 +6,13 @@ on:
     paths:
       - 'plugin/**'
       - '.github/workflows/gem-push.yml'
+      - '!**/README.md'
   pull_request:
     branches: [ "master" ]
     paths:
       - 'plugin/**'
       - '.github/workflows/gem-push.yml'
+      - '!**/README.md'
 
 jobs:
   build:
