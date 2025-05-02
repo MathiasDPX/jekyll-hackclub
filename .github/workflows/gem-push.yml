@@ -17,7 +17,9 @@ jobs:
       uses: ruby/setup-ruby@v1.237.0
       with:
         ruby-version: 2.6.10
+
     - name: Publish to GPR
+      continue-on-error: true
       run: |
         cd plugin
         mkdir -p $HOME/.gem
@@ -29,7 +31,9 @@ jobs:
       env:
         GEM_HOST_API_KEY: "Bearer ${{secrets.GITHUB_TOKEN}}"
         OWNER: ${{ github.repository_owner }}
+
     - name: Publish to RubyGems
+      continue-on-error: true
       run: |
         cd plugin
         mkdir -p $HOME/.gem
