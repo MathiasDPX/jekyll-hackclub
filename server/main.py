@@ -1,11 +1,15 @@
+from flask import Flask, abort, redirect
 from slack_sdk import WebClient
 from dotenv import load_dotenv
-from flask import Flask, abort
 import os
 
 load_dotenv()
 app = Flask(__name__)
 client = WebClient(os.environ.get("SLACK_BOT_TOKEN"))
+
+@app.route("/", methods=["GET"])
+def index():
+    return redirect("https://github.com/MathiasDPX/jekyll-hackclub/")
 
 @app.route("/users.info/<uid>", methods=["GET"])
 def users_page(uid:str):
