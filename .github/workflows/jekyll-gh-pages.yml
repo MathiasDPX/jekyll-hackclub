@@ -1,0 +1,58 @@
+name: Build and Deploy Jekyll Site
+
+on:
+  push:
+    branches:
+      - master
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Set up Ruby
+      uses: ruby/setup-ruby@v1.237.0
+      with:
+        ruby-version: 2.6.10
+
+    - name: Install dependencies
+      run: |
+        gem install bundler
+        cd site
+        # Ensure the plugin is included in the Gemfile
+        if ! grep -q "jekyll-hackclub" Gemfile; then
+          echo 'gem "jekyll-hackclub", path: "../plugin"' >> Gemfile
+        fi
+        bundle install
+
+    - name: Build Jekyll site
+      run: |
+        cd site
+        bundle exec jekyll build
+
+    - name: Upload artifact
+      uses: actions/upload-pages-artifact@v3
+      with:
+        path: site/_site
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    permissions:
+      pages: write
+      id-token: write
+    steps:
+    - name: Deploy to GitHub Pages
+      id: deployment
+      uses: actions/deploy-pages@v4
