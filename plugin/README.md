@@ -1,4 +1,6 @@
 # jekyll-hackclub
+![Gem Downloads](https://img.shields.io/gem/dt/jekyll-hackclub?label=downloads)
+![Gem Version](https://img.shields.io/gem/v/jekyll-hackclub?label=latest)
 
 This jekyll plugin can resolve channel id / user id to a \<a> link
 

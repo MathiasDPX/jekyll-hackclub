@@ -1,4 +1,5 @@
 # jekyll-hackclub
+![Gem Downloads](https://img.shields.io/gem/dt/jekyll-hackclub?label=downloads)
 
 The repository is split in 3 folders:
 - `site` is a template site for displaying jekyll-hackclub possibilities, it uses the plugin from the plugin folder and not the plugin from RubyGems
