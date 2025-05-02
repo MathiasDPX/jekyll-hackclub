@@ -1,0 +1,12 @@
+title: Jekyll site
+encoding: utf-8
+
+#HACKCLUB_API: "https://example.com"
+exclude: ["README.md", "LICENSE", "*.gem", "*.gemspec", "Gemfile.lock"]
+
+plugins:
+  - jekyll-hackclub
+
+navigation:
+- title: Home
+  url: /

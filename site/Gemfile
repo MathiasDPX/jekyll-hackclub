@@ -1,0 +1,4 @@
+gem 'jekyll-hackclub', path: '../plugin'
+
+source "https://rubygems.org"
+gemspec
