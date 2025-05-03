@@ -42,4 +42,8 @@ jobs:
         host: hackclub.app
         username: mathias
         key: ${{ secrets.SSH_PRIVATE_KEY }}
-        script: systemctl --user restart slack-mirror
+        script: |
+          cd /home/mathias/slack-mirror
+          source .venv/bin/activate
+          pip install -r requirements.txt
+          systemctl --user restart slack-mirror
