@@ -1,0 +1,45 @@
+name: Push server to Nest
+
+on:
+  push:
+    branches: [ "master" ]
+    paths:
+      - 'server/'
+      - '.github/workflows/push-server.yml'
+      - '!**/README.md'
+  pull_request:
+    branches: [ "master" ]
+    paths:
+      - 'server/'
+      - '.github/workflows/push-server.yml'
+      - '!**/README.md'
+
+permissions:
+  contents: read
+  id-token: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: SFTP Upload
+      uses: wlixcc/SFTP-Deploy-Action@v1.2.6
+      with:
+        username: mathias
+        server: hackclub.app
+        ssh_private_key: ${{ secrets.SSH_PRIVATE_KEY }}
+        local_path: "./server/*"
+        remote_path: "/home/mathias/slack-mirror"
+        sftpArgs: '-o ConnectTimeout=5'
+
+    - name: Restart service
+      uses: appleboy/ssh-action@v1
+      with:
+        host: hackclub.app
+        username: mathias
+        key: ${{ secrets.SSH_PRIVATE_KEY }}
+        script: systemctl --user restart slack-mirror
