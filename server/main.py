@@ -7,6 +7,8 @@ load_dotenv()
 app = Flask(__name__)
 client = WebClient(os.environ.get("SLACK_BOT_TOKEN"))
 
+emojis = client.emoji_list().data.get("emoji", {})
+
 @app.route("/", methods=["GET"])
 def index():
     return redirect("https://github.com/MathiasDPX/jekyll-hackclub/")
@@ -30,6 +32,11 @@ def channels_page(cid:str):
         return
 
     return req.data
+
+@app.route("/emoji/<eid>", methods=["GET"])
+def emoji_page(eid:str):
+    eid = eid.strip(":")
+    return emojis.get(eid, "https://emoji.slack-edge.com/T0266FRGM/alibaba-question/c5ba32ce553206b8.png")
 
 if __name__ == "__main__":
     app.run()

@@ -9,7 +9,7 @@ Gem::Specification.new do |spec|
     spec.licenses = ["MIT"]
     
     spec.require_paths= ['lib']
-    spec.files = ["lib/jekyll-hackclub.rb"]
+    spec.files = ["lib/**/*.rb"]
 
     spec.add_dependency 'jekyll', '>= 3.5.0'
 
