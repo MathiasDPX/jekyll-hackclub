@@ -1,6 +1,7 @@
 name: Build and Deploy Jekyll Site
 
 on:
+  workflow_dispatch:
   push:
     branches: [ "master" ]
     paths:
