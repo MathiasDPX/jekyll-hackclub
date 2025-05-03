@@ -5,7 +5,7 @@ on:
   push:
     branches: [ "master" ]
     paths:
-      - 'server/'
+      - 'server/**'
       - '.github/workflows/push-server.yml'
       - '!**/README.md'
   pull_request:
