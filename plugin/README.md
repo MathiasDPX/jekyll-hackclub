@@ -5,9 +5,10 @@
 This jekyll plugin can resolve channel id / user id to a \<a> link
 
 jekyll-hackclub add class to the a tag for custom CSS:
-- `hackclub-mention`: for both channels and user.
+- `hackclub-mention`: for both channels and users.
 - `hackclub-user`: for users
-- `hackclub-channel`: for channel
+- `hackclub-channel`: for channels
+- `hackclub-emoji`: for emojis
 
 ## Examples
 <sub>class attribute isn't showed here but is present has described above</sub>
@@ -18,7 +19,7 @@ jekyll-hackclub add class to the a tag for custom CSS:
 Unknown users/private channels will have "unavailable" as the display name, but still have a working link.
 
 ```markdown
-{% hackclub U080HHYN0JD %}
+{% mention U080HHYN0JD %}
 ```
 while resolve to
 ```html
@@ -27,8 +28,22 @@ while resolve to
 
 You can add an argument for the display name like
 ```markdown
-{% hackclub C08K7ARJ58U ; get-a-cool-hat-ysws %}
+{% mention C08K7ARJ58U ; get-a-cool-hat-ysws %}
 ```
 ```html
 <a href="https://hackclub.slack.com/archives/C08K7ARJ58U">#get-a-cool-hat-ysws</a>
 ```
+
+### Add an emoji
+No preprocessing while be applied to emoji, that mean if an emoji is 512x512, it will be 512x512 on your page, however you can copy css from `site/_sass/base.scss`
+
+```
+{% emoji errors %}
+```
+while resolve to
+```html
+<img src="https://emoji.slack-edge.com/T0266FRGM/errors/5f5a9514ccf00c85.png" title=":errors:" alt=":errors:" class="hackclub-emoji">
+```
+
+If a emoji isnt found, :alibaba-question: while be given because it's funny
+<img src="https://emoji.slack-edge.com/T0266FRGM/alibaba-question/c5ba32ce553206b8.png" style="height:1.25em;vertical-align:middle;">
