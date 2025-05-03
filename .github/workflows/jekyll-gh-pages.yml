@@ -2,8 +2,17 @@ name: Build and Deploy Jekyll Site
 
 on:
   push:
-    branches:
-      - master
+    branches: [ "master" ]
+    paths:
+      - 'site/'
+      - '.github/workflows/jekyll-gh-pages.yml'
+      - '!**/README.md'
+  pull_request:
+    branches: [ "master" ]
+    paths:
+      - 'site/'
+      - '.github/workflows/jekyll-gh-pages.yml'
+      - '!**/README.md'
 
 permissions:
   contents: read
