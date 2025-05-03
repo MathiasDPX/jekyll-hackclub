@@ -8,12 +8,6 @@ on:
       - 'server/**'
       - '.github/workflows/push-server.yml'
       - '!**/README.md'
-  pull_request:
-    branches: [ "master" ]
-    paths:
-      - 'server/'
-      - '.github/workflows/push-server.yml'
-      - '!**/README.md'
 
 permissions:
   contents: read
