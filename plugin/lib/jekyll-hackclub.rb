@@ -1,5 +1,6 @@
-require_relative "./emoji"
-require_relative "./mentions"
+require_relative "./tags/emoji"
+require_relative "./tags/mentions"
+require_relative "./tags/user-tag"
+require_relative "./tags/channel-tag"
+
 require_relative "./server-bridge"
-require_relative "./user-tag"
-require_relative "./channel-tag"

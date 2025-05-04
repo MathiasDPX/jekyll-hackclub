@@ -1,5 +1,5 @@
 require "jekyll"
-require_relative "./server-bridge"
+require_relative "../server-bridge"
 
 module Jekyll
     class HackclubEmoji < Liquid::Tag

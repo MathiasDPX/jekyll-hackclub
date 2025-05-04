@@ -1,14 +1,14 @@
 require "jekyll"
-require_relative "./server-bridge"
+require_relative "../server-bridge"
 
 module Jekyll
-    class HackclubChannelTag < Liquid::Tag
+    class HackclubUserTag < Liquid::Tag
         def initialize(tagName, content, tokens)
             super
             content = content.strip()
             @id, *rest = content.split(" ", 2)
             keys = rest.join.split(".")
-            @data = HackclubRequest.raw_channel(@id).dig("channel").dig(*keys)
+            @data = HackclubRequest.raw_user(@id).dig("user").dig(*keys)
         end
 
         def render(context)
@@ -20,5 +20,5 @@ module Jekyll
         end
     end
 
-    Liquid::Template.register_tag "channel", HackclubChannelTag
+    Liquid::Template.register_tag "user", HackclubUserTag
 end
