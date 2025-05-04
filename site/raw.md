@@ -16,15 +16,15 @@ GIF: {% emoji yay %}<br>
 PNG: {% emoji errors %}
 
 ## Raw user
-Name (root key): <code>{% user U080HHYN0JD name %}</code><br>
-Pronouns (nested key): <code>{% user U080HHYN0JD profile.pronouns %}</code><br>
-Is Admin (bool value): <code>{% user U080HHYN0JD is_admin %}</code><br>
-TZ Offset (int value): <code>{% user U080HHYN0JD tz_offset %}</code><br>
-Dog (unknown value): <code>{% user U080HHYN0JD dog %}</code>
+name (root key): <code>{% user U080HHYN0JD name %}</code><br>
+profile.pronouns (nested key): <code>{% user U080HHYN0JD profile.pronouns %}</code><br>
+is_admin (bool value): <code>{% user U080HHYN0JD is_admin %}</code><br>
+tz_offset (int value): <code>{% user U080HHYN0JD tz_offset %}</code><br>
+dog (unknown value): <code>{% user U080HHYN0JD dog %}</code>
 
 ## Raw channel
-Name (root key): <code>{% channel C08P0L0GQJU name %}</code><br>
-Purpose (nested key): <code>{% channel C08P0L0GQJU purpose.value %}</code><br>
-Is Archived (bool value): <code>{% channel C08P0L0GQJU is_archived %}</code><br>
-Updated (int value): <code>{% channel C08P0L0GQJU updated %}</code><br>
-Cat (unknown value): <code>{% channel C08P0L0GQJU cat %}</code>
+name (root key): <code>{% channel C08P0L0GQJU name %}</code><br>
+purpose.value (nested key): <code>{% channel C08P0L0GQJU purpose.value %}</code><br>
+is_archived (bool value): <code>{% channel C08P0L0GQJU is_archived %}</code><br>
+updated (int value): <code>{% channel C08P0L0GQJU updated %}</code><br>
+cat (unknown value): <code>{% channel C08P0L0GQJU cat %}</code>
