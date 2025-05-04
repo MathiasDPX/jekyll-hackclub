@@ -1,6 +1,6 @@
 body {
     color: #ececec;
-    background-color: #16191D;
+    background-color: #121417;
     font-family: consolas;
 }
 
@@ -9,7 +9,28 @@ a {
 }
 
 img.hackclub-emoji {
-    height: 1.25em;
+    height: 1.5em;
     vertical-align: middle;
     width: auto;
+}
+
+h2 {
+    margin-bottom: 0px;
+    color: #E06C75;
+}
+
+a {
+    color: #61AFEF;
+    text-decoration: none; // Supprime le soulignement par défaut
+    transition: color 0.3s ease; // Animation fluide pour les interactions
+}
+
+a:hover {
+    color: #4FA3E0; // Couleur légèrement différente au survol
+    text-decoration: underline; // Ajout d'un soulignement au survol
+}
+
+code {
+    font-size: 1.1em;
+    color: #E5C07B;
 }
