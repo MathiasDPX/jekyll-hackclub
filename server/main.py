@@ -34,6 +34,25 @@ def users_page(uid: str):
         cache.set(key, response)
         return jsonify(response)
 
+@app.route("/files.info/<fid>", methods=["GET"])
+def files_page(fid: str):
+    key = f"files.info#{fid}"
+    data = cache.get(key)
+
+    if data is not None:
+        if isinstance(data, int):
+            abort(data)
+        return jsonify(data)
+    
+    try:
+        response = client.files_info(file=fid).data
+    except Exception:
+        cache.set(key, 500)
+        abort(500)
+    else:
+        cache.set(key, response)
+        return jsonify(response)
+
 @app.route("/conversations.info/<cid>", methods=["GET"])
 def channels_page(cid: str):
     key = f"conversations.info#{cid}"

@@ -21,6 +21,19 @@ module HackclubRequest
         end
     end
 
+    def self.raw_file(fileid)
+        uri = URI("#{host}/files.info/#{fileid}")
+        res = Net::HTTP.get_response(uri)
+
+        data = JSON.parse(res.body)
+        if res.is_a?(Net::HTTPSuccess)
+            data
+        else
+            {}
+        end
+    end
+
+
     def self.raw_user(userid)
         uri = URI("#{host}/users.info/#{userid}")
         res = Net::HTTP.get_response(uri)

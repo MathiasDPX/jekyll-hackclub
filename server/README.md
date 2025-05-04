@@ -5,6 +5,7 @@ Currently supported methods:
 - conversations.list
 - users.info
 - emoji
+- files.info
 
 ## Instances
 Nest: `slack.mathias.hackclub.app`

@@ -6,7 +6,3 @@ exclude: ["README.md", "LICENSE", "*.gem", "*.gemspec", "Gemfile.lock"]
 
 plugins:
   - jekyll-hackclub
-
-navigation:
-- title: Home
-  url: /

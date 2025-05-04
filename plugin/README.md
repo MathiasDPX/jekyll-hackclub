@@ -9,8 +9,10 @@ jekyll-hackclub add class to the a tag for custom CSS:
 - `hackclub-user`: for users
 - `hackclub-channel`: for channels
 - `hackclub-emoji`: for emojis
+- `hackclub-file`: for files
 
 ## Examples
+A full showcase can be seen on [/raw](https://mathiasdpx.github.io/jekyll-hackclub/raw)
 <sub>class attribute isn't showed here but is present has described above</sub>
 
 ### Resolve a mention

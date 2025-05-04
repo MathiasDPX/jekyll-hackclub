@@ -17,6 +17,11 @@ With pipes: {% mention U080HHYN0JD | capitalize %} {% mention C08K7ARJ58U | uppe
 GIF: {% emoji yay %}<br>
 PNG: {% emoji errors %}
 
+## Files
+No args: {% file F07PV2SSJ64 %}<br>
+Permalink: <code>{% file F07PV2SSJ64 ; permalink %}</code><br>
+with pipe: <code>{% file F07PV2SSJ64 ; title ; [0:-6] | downcase %}
+
 ## Raw user
 name (root key): <code>{% user U080HHYN0JD ; name %}</code><br>
 profile.pronouns (nested key): <code>{% user U080HHYN0JD ; profile.pronouns %}</code><br>
