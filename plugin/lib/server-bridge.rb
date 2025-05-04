@@ -21,6 +21,18 @@ module HackclubRequest
         end
     end
 
+    def self.raw_user(userid)
+        uri = URI("#{host}/users.info/#{userid}")
+        res = Net::HTTP.get_response(uri)
+
+        data = JSON.parse(res.body)
+        if res.is_a?(Net::HTTPSuccess)
+            data
+        else
+            {}
+        end
+    end
+
     def self.resolve_username(userid)
         uri = URI("#{host}/users.info/#{userid}")
         res = Net::HTTP.get_response(uri)
@@ -34,6 +46,18 @@ module HackclubRequest
             end
         rescue
             "unavailable"
+        end
+    end
+
+    def self.raw_channel(channelid)
+        uri = URI("#{host}/conversations.info/#{channelid}")
+        res = Net::HTTP.get_response(uri)
+
+        data = JSON.parse(res.body)
+        if res.is_a?(Net::HTTPSuccess)
+            data
+        else
+            {}
         end
     end
 

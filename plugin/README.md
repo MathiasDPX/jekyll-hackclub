@@ -34,6 +34,15 @@ You can add an argument for the display name like
 <a href="https://hackclub.slack.com/archives/C08K7ARJ58U">#get-a-cool-hat-ysws</a>
 ```
 
+### Raw data
+You can read raw data from the json with `{% user %}` or `{% channel %}`
+
+i.e.
+```markdown
+{% user C08P0L0GQJU name %} <!-- For accessing the "name" value -->
+```
+while resolve to `mathias`
+
 ### Add an emoji
 No preprocessing while be applied to emoji, that mean if an emoji is 512x512, it will be 512x512 on your page, however you can copy css from `site/_sass/base.scss`
 

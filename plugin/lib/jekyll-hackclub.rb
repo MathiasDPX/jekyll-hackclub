@@ -1,3 +1,5 @@
 require_relative "./emoji"
 require_relative "./mentions"
 require_relative "./server-bridge"
+require_relative "./user-tag"
+require_relative "./channel-tag"
