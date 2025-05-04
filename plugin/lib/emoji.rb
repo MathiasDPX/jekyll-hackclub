@@ -5,7 +5,7 @@ module Jekyll
     class HackclubEmoji < Liquid::Tag
         def initialize(tagName, content, tokens)
             super
-            @id = content.gsub(/\A:+|:+\z/, '')
+            @id = content.gsub(/\A:+|:+\z/, '').strip
             @img_url = HackclubRequest.resolve_emoji(@id)
         end
 
