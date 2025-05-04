@@ -23,13 +23,15 @@ profile.pronouns (nested key): <code>{% user U080HHYN0JD ; profile.pronouns %}</
 is_admin (bool value): <code>{% user U080HHYN0JD ; is_admin %}</code><br>
 tz_offset (int value): <code>{% user U080HHYN0JD ; tz_offset %}</code><br>
 dog (unknown value): <code>{% user U080HHYN0JD ; dog %}</code><br>
+with pipes: <code>{% user U080HHYN0JD ; name ; capitalize %}</code><br>
 
 ## Raw channel
-name (root key): <code>{% channel C08P0L0GQJU name %}</code><br>
-purpose.value (nested key): <code>{% channel C08P0L0GQJU purpose.value %}</code><br>
-is_archived (bool value): <code>{% channel C08P0L0GQJU is_archived %}</code><br>
-updated (int value): <code>{% channel C08P0L0GQJU updated %}</code><br>
-cat (unknown value): <code>{% channel C08P0L0GQJU cat %}</code>
+name (root key): <code>{% channel C08P0L0GQJU ; name %}</code><br>
+purpose.value (nested key): <code>{% channel C08P0L0GQJU ; purpose.value %}</code><br>
+is_archived (bool value): <code>{% channel C08P0L0GQJU ; is_archived %}</code><br>
+updated (int value): <code>{% channel C08P0L0GQJU ; updated %}</code><br>
+cat (unknown value): <code>{% channel C08P0L0GQJU ; cat %}</code><br>
+with pipes: <code>{% channel C08P0L0GQJU ; name ; [-4:-1] %}</code><br>
 
 ## Parser
 Simple: <code>{% _parser hello james! %}</code><br>
