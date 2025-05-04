@@ -1,20 +1,5 @@
-module StringManipulation
-    def self.uppercase(content)
-        content.upcase
-    end
-
-    def self.downcase(content)
-        content.downcase
-    end
-
-    def self.capitalize(content)
-        content.capitalize
-    end
-
-    def self.size(content)
-        content.size
-    end
-end
+require_relative "./pipes/strings"
+require_relative "./pipes/numbers"
 
 module ArgsParser
     def self.split_args(content)
@@ -23,13 +8,17 @@ module ArgsParser
     
     def self.eval_pipes_with_val(value, pipes)
         pipes.each do |pipe|
+            args = pipe.split(" ") || []
+            func = args.shift || pipe
             if (match = pipe.match(/\[(-?\d+):(-?\d+)\]/))
                 start_idx, end_idx = match[1].to_i, match[2].to_i
                 value = value[start_idx..end_idx]
-            elsif StringManipulation.respond_to?(pipe)
-                value = StringManipulation.public_send(pipe, value)
+            elsif StringManipulation.respond_to?(func)
+                value = StringManipulation.public_send(func, value, args)
+            elsif NumbersManipulation.respond_to?(func)
+                value = NumbersManipulation.public_send(func, value, args)
             else
-                raise ArgumentError, "Unkown pipe '#{pipe}'"
+                raise ArgumentError, "Unkown function '#{func}'"
             end
         end
         value

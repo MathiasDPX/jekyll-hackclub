@@ -46,3 +46,4 @@ Negative substring: <code>{% _parser hello james! | [6:-1] %}</code><br>
 Multiple pipes: <code>{% _parser hello james! | uppercase | [0:4] %}</code><br>
 Multiple args: <code>{% _parser hello james! ; joe dalton %}</code><br>
 Multiple args + pipe: <code>{% _parser hello james! | uppercase ; joe dalton | capitalize %}</code><br>
+To int: <code>{% _parser 42 | to_int | multiply 2 %}</code><br>
