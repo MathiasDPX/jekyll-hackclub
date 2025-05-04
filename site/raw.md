@@ -4,7 +4,7 @@
 <title>Raw tests - Jekyll-HackClub</title>
 <link rel="stylesheet" href="./assets/styles.css">
 
-[Go back home](../)
+[Go back home](./)
 
 ## Mentions
 Classic: {% mention U080HHYN0JD %} | {% mention C08K7ARJ58U %}<br>
