@@ -1,4 +1,5 @@
 require "jekyll"
+require_relative "../args-parser"
 require_relative "../server-bridge"
 
 module Jekyll
@@ -6,8 +7,9 @@ module Jekyll
         def initialize(tagName, content, tokens)
             super
             content = content.strip()
-            @id, *rest = content.split(" ", 2)
+            @id, *rest = ArgsParser.split_args(content)
             keys = rest.join.split(".")
+
             @data = HackclubRequest.raw_user(@id).dig("user").dig(*keys)
         end
 
