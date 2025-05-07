@@ -1,3 +1,4 @@
 Flask
 slack_sdk
+flask-cors
 python-dotenv

@@ -1,11 +1,13 @@
 from flask import Flask, abort, redirect, jsonify
 from slack_sdk import WebClient
 from dotenv import load_dotenv
+from flask_cors import CORS
 import os
 from cache_manager import Cache
 
 load_dotenv()
 app = Flask(__name__)
+CORS(app)
 client = WebClient(os.environ.get("SLACK_BOT_TOKEN"))
 
 cache = Cache(ttl=int(os.getenv("CACHE_TTL", 3600)))
