@@ -40,7 +40,7 @@ with pipes: <code>{% channel C08P0L0GQJU ; name ; [-4:-1] %}</code><br>
 
 ## Raw usergroup
 id (root key): <code>{% usergroup S05RNTN07SN ; id %}</code><br>
-channels (nested key): <code>{% usergroup S05RNTN07SN ; prefs.channels %}</code><br>
+channels (nested key): <code>{% usergroup S05RNTN07SN ; prefs.channels ; first %}</code><br>
 name: <code>{% usergroup S05RNTN07SN ; name %}</code><br>
 
 ## Parser

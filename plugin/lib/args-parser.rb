@@ -1,5 +1,6 @@
 require_relative "./pipes/strings"
 require_relative "./pipes/numbers"
+require_relative "./pipes/arrays"
 
 module ArgsParser
     def self.split_args(content)
@@ -17,6 +18,8 @@ module ArgsParser
                 value = StringManipulation.public_send(func, value, args)
             elsif NumbersManipulation.respond_to?(func)
                 value = NumbersManipulation.public_send(func, value, args)
+            elsif ArraysManipulation.respond_to?(func)
+                value = ArraysManipulation.public_send(func, value, args)
             else
                 raise ArgumentError, "Unkown function '#{func}'"
             end
