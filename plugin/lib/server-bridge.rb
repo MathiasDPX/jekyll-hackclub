@@ -33,7 +33,6 @@ module HackclubRequest
         end
     end
 
-
     def self.raw_user(userid)
         uri = URI("#{host}/users.info/#{userid}")
         res = Net::HTTP.get_response(uri)
@@ -44,6 +43,23 @@ module HackclubRequest
         else
             {}
         end
+    end
+
+    def self.raw_usergroup(groupid)
+        uri = URI("#{host}/usergroup/#{groupid}")
+        res = Net::HTTP.get_response(uri)
+
+        data = JSON.parse(res.body)
+        if res.is_a?(Net::HTTPSuccess)
+            data
+        else
+            {}
+        end
+    end
+
+    def self.resolve_usergroup(groupid)
+        data = raw_usergroup(groupid)
+        return data.dig("handle") || "unknown"
     end
 
     def self.resolve_username(userid)

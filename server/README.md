@@ -6,6 +6,7 @@ Currently supported methods:
 - users.info
 - emoji
 - files.info
+- usergroups
 
 ## Instances
 Nest: `slack.mathias.hackclub.app`

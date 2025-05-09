@@ -12,6 +12,10 @@ client = WebClient(os.environ.get("SLACK_BOT_TOKEN"))
 
 cache = Cache(ttl=int(os.getenv("CACHE_TTL", 3600)))
 emojis = client.emoji_list().data.get("emoji", {})
+usergroups = {}
+
+for usergroup in client.usergroups_list().data.get("usergroups", []):
+    usergroups[usergroup["id"]] = usergroup
 
 @app.route("/", methods=["GET"])
 def index():
@@ -81,6 +85,10 @@ def emoji_page(eid: str):
         eid,
         "https://emoji.slack-edge.com/T0266FRGM/alibaba-question/c5ba32ce553206b8.png"
     )
+
+@app.route("/usergroup/<gid>", methods=["GET"])
+def usergroup_page(gid: str):
+    return usergroups.get(gid, {})
 
 if __name__ == "__main__":
     app.run()
