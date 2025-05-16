@@ -10,99 +10,64 @@ module HackclubRequest
         attr_accessor :host
     end
 
-    def self.resolve_emoji(id)
-        uri = URI("#{host}/emoji/#{id.strip}")
-        res = Net::HTTP.get_response(uri)
+    def self.make_request(path)
+        uri = URI("#{host}#{path}")
+        req = Net::HTTP::Get.new(uri)
+        req['Referer'] = "jekyll-hackclub"
 
-        if res.is_a?(Net::HTTPSuccess)
-            res.body
-        else
-            DEFAULT_EMOJI
+        res = Net::HTTP.start(uri.hostname, uri.port, use_ssl: uri.scheme == "https") do |http|
+            http.request(req)
         end
+
+        return JSON.parse(res.body), res
+    rescue JSON::ParserError
+        return {}, res
+    rescue => e
+        warn "Request to #{uri} failed: #{e}"
+        return {}, nil
+    end
+
+    def self.resolve_emoji(id)
+        _, res = make_request("/emoji/#{id.strip}")
+        res&.is_a?(Net::HTTPSuccess) ? res.body : DEFAULT_EMOJI
     end
 
     def self.raw_file(fileid)
-        uri = URI("#{host}/files.info/#{fileid}")
-        res = Net::HTTP.get_response(uri)
-
-        data = JSON.parse(res.body)
-        if res.is_a?(Net::HTTPSuccess)
-            data
-        else
-            {}
-        end
+        data, res = make_request("/files.info/#{fileid}")
+        res&.is_a?(Net::HTTPSuccess) ? data : {}
     end
 
     def self.raw_user(userid)
-        uri = URI("#{host}/users.info/#{userid}")
-        res = Net::HTTP.get_response(uri)
-
-        data = JSON.parse(res.body)
-        if res.is_a?(Net::HTTPSuccess)
-            data
-        else
-            {}
-        end
+        data, res = make_request("/users.info/#{userid}")
+        res&.is_a?(Net::HTTPSuccess) ? data : {}
     end
 
     def self.raw_usergroup(groupid)
-        uri = URI("#{host}/usergroup/#{groupid}")
-        res = Net::HTTP.get_response(uri)
-
-        data = JSON.parse(res.body)
-        if res.is_a?(Net::HTTPSuccess)
-            data
-        else
-            {}
-        end
+        data, res = make_request("/usergroup/#{groupid}")
+        res&.is_a?(Net::HTTPSuccess) ? data : {}
     end
 
     def self.resolve_usergroup(groupid)
         data = raw_usergroup(groupid)
-        return data.dig("handle") || "unknown"
+        data["handle"] || "unknown"
     end
 
     def self.resolve_username(userid)
-        uri = URI("#{host}/users.info/#{userid}")
-        res = Net::HTTP.get_response(uri)
-
-        begin
-            data = JSON.parse(res.body)
-            if res.is_a?(Net::HTTPSuccess)
-                data.dig("user", "name") || "unknown"
-            else
-                "unknown"
-            end
-        rescue
-            "unavailable"
-        end
+        data, res = make_request("/users.info/#{userid}")
+        res&.is_a?(Net::HTTPSuccess) ? (data.dig("user", "name") || "unknown") : "unknown"
+    rescue
+        "unavailable"
     end
 
     def self.raw_channel(channelid)
-        uri = URI("#{host}/conversations.info/#{channelid}")
-        res = Net::HTTP.get_response(uri)
-
-        data = JSON.parse(res.body)
-        if res.is_a?(Net::HTTPSuccess)
-            data
-        else
-            {}
-        end
+        data, res = make_request("/conversations.info/#{channelid}")
+        res&.is_a?(Net::HTTPSuccess) ? data : {}
     end
 
     def self.resolve_channel(channelid)
-        uri = URI("#{host}/conversations.info/#{channelid}")
-        res = Net::HTTP.get_response(uri)
-
-        begin
-            data = JSON.parse(res.body)
-            if res.is_a?(Net::HTTPSuccess)
-                data.dig("channel", "name") || "unknown"
-            else
-                "unknown"
-            end
-        rescue
-            "unavailable"
-        end
+        data, res = make_request("/conversations.info/#{channelid}")
+        res&.is_a?(Net::HTTPSuccess) ? (data.dig("channel", "name") || "unknown") : "unknown"
+    rescue
+        "unavailable"
     end
 end
