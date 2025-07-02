@@ -1,0 +1,150 @@
+{
+	"info": {
+		"_postman_id": "e7c831ae-e69c-4fc6-9e66-726f6486624d",
+		"name": "Hackclub Slack Bridge",
+		"description": "Postman documentation for jekyll-hackclub/slack bridge",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "12336365"
+	},
+	"item": [
+		{
+			"name": "Users",
+			"item": [
+				{
+					"name": "Info",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{DOMAIN}}/users.info/U080HHYN0JD",
+							"host": [
+								"{{DOMAIN}}"
+							],
+							"path": [
+								"users.info",
+								"U080HHYN0JD"
+							]
+						},
+						"description": "Gets information about a user.\n\nMirror for [users.info](https://api.slack.com/methods/users.info)"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Conversations",
+			"item": [
+				{
+					"name": "Info",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{DOMAIN}}/conversations.info/C08P0L0GQJU",
+							"host": [
+								"{{DOMAIN}}"
+							],
+							"path": [
+								"conversations.info",
+								"C08P0L0GQJU"
+							]
+						},
+						"description": "Retrieve information about a conversation.\n\nMirror for [conversations.info](https://api.slack.com/methods/conversations.info)"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Files",
+			"item": [
+				{
+					"name": "Info",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{DOMAIN}}/files.info/F07PV2SSJ64",
+							"host": [
+								"{{DOMAIN}}"
+							],
+							"path": [
+								"files.info",
+								"F07PV2SSJ64"
+							]
+						},
+						"description": "Gets information about a file.\n\nMirror for [files.info](https://api.slack.com/methods/files.info)"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Usergroups",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{DOMAIN}}/usergroup/S06QGQG6FG8",
+					"host": [
+						"{{DOMAIN}}"
+					],
+					"path": [
+						"usergroup",
+						"S06QGQG6FG8"
+					]
+				},
+				"description": "Retrieve information about a usergroup. Fetched on the start of the server\n\nMirror for [usergroups.list](https://api.slack.com/methods/usergroups.list)"
+			},
+			"response": []
+		},
+		{
+			"name": "Emoji",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{DOMAIN}}/emoji/aga-transparent",
+					"host": [
+						"{{DOMAIN}}"
+					],
+					"path": [
+						"emoji",
+						"aga-transparent"
+					]
+				},
+				"description": "Gets URL from an emoji name (custom emoji only). Return :alibaba-question: if the emoji isnt found\n\nMirror for [emoji.list](https://api.slack.com/methods/emoji.list)"
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					"pm.request.headers.upsert({key: \"Referer\", value: \"Postman\" });"
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "DOMAIN",
+			"value": "https://slack.mathias.hackclub.app",
+			"type": "string"
+		}
+	]
+}

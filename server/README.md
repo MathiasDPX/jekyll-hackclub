@@ -8,5 +8,8 @@ Currently supported methods:
 - files.info
 - usergroups
 
+## Docs
+- [Postman collection](https://raw.githubusercontent.com/MathiasDPX/jekyll-hackclub/refs/heads/master/server/postman_collection.json)
+
 ## Instances
 Nest: `slack.mathias.hackclub.app`
