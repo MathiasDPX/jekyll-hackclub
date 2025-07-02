@@ -2,6 +2,7 @@
 ---
 
 <title>Jekyll-HackClub</title>
+<link rel="shortcut icon" type="image/x-icon" href="{{ '/assets/favicon.ico' | relative_url }}">
 <link rel="stylesheet" href="./assets/styles.css">
 
 Made by {% mention U080HHYN0JD %} for {% mention C08K7ARJ58U %} {% emoji alibaba-be-helpful %}<br>

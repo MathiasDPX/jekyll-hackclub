@@ -3,6 +3,7 @@
 
 <title>Raw tests - Jekyll-HackClub</title>
 <link rel="stylesheet" href="./assets/styles.css">
+<link rel="shortcut icon" type="image/x-icon" href="{{ '/assets/favicon.ico' | relative_url }}">
 
 [Go back home](./)
 
