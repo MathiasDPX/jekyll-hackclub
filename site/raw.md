@@ -8,11 +8,11 @@
 [Go back home](./)
 
 ## Mentions
-Classic: {% mention U080HHYN0JD %} {% mention C08K7ARJ58U %} {% mention S05RNTN07SN %}<br>
-Renamed: {% mention U080HHYN0JD ; MathiasDPX %} {% mention C08K7ARJ58U ; get-a-cool-hat-ysws %} {% mention S05RNTN07SN ; free-birds %} <br>
+Classic: {% mention U080HHYN0JD %} {% mention C08K7ARJ58U %} {% mention S06QGQG6FG8 %}<br>
+Renamed: {% mention U080HHYN0JD ; MathiasDPX %} {% mention C08K7ARJ58U ; get-a-cool-hat-ysws %} {% mention S06QGQG6FG8 ; big-birds-are-watching-you %} <br>
 Unknown: {% mention C08N35P7LCT %} {% mention U1234567890 %} {% mention S0123456789 %}
 
-With pipes: {% mention U080HHYN0JD | capitalize %} {% mention C08K7ARJ58U | uppercase | [0:-2] %} {% mention S05RNTN07SN | [0:-2] %}
+With pipes: {% mention U080HHYN0JD | capitalize %} {% mention C08K7ARJ58U | uppercase | [0:-2] %} {% mention S06QGQG6FG8 | [0:-2] %}
 
 ## Emojis
 GIF: {% emoji yay %}<br>
@@ -40,9 +40,9 @@ cat (unknown value): <code>{% channel C08P0L0GQJU ; cat %}</code><br>
 with pipes: <code>{% channel C08P0L0GQJU ; name ; [-4:-1] %}</code><br>
 
 ## Raw usergroup
-id (root key): <code>{% usergroup S05RNTN07SN ; id %}</code><br>
-channels (nested key): <code>{% usergroup S05RNTN07SN ; prefs.channels ; first %}</code><br>
-name: <code>{% usergroup S05RNTN07SN ; name %}</code><br>
+id (root key): <code>{% usergroup S06QGQG6FG8 ; id %}</code><br>
+channels (nested key): <code>{% usergroup S06QGQG6FG8 ; prefs.channels ; first %}</code><br>
+name: <code>{% usergroup S06QGQG6FG8 ; name %}</code><br>
 
 ## Parser
 Simple: <code>{% _parser hello james! %}</code><br>
