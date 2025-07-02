@@ -9,7 +9,8 @@ Currently supported methods:
 - usergroups
 
 ## Docs
-- [Postman collection](https://raw.githubusercontent.com/MathiasDPX/jekyll-hackclub/refs/heads/master/server/postman_collection.json)
+- [Postman collection](https://raw.githubusercontent.com/MathiasDPX/jekyll-hackclub/refs/heads/master/server/docs/postman_collection.json)
+- [OpenAPI](https://raw.githubusercontent.com/MathiasDPX/jekyll-hackclub/refs/heads/master/server/docs/openapi.yml)
 
 ## Instances
 Nest: `slack.mathias.hackclub.app`
