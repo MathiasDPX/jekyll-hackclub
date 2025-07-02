@@ -1,0 +1,86 @@
+openapi: 3.0.4
+info:
+  title: Hackclub Slack Bridge
+  description: OpenAPI documentation for jekyll-hackclub/slack bridge
+  version: "1.0.0"
+
+servers:
+  - url: https://slack.mathias.hackclub.app
+
+paths:
+  /users.info/{user_id}:
+    get:
+      summary: Get User Info
+      description: Gets information about a user. Mirror for [users.info](https://api.slack.com/methods/users.info)
+      parameters:
+        - name: user_id
+          in: path
+          required: true
+          schema:
+            type: string
+          example: U080HHYN0JD
+      responses:
+        '200':
+          description: Successful response
+
+  /conversations.info/{channel_id}:
+    get:
+      summary: Get Conversation Info
+      description: Retrieve information about a conversation. Mirror for [conversations.info](https://api.slack.com/methods/conversations.info)
+      parameters:
+        - name: channel_id
+          in: path
+          required: true
+          schema:
+            type: string
+          example: C08P0L0GQJU
+      responses:
+        '200':
+          description: Successful response
+
+  /files.info/{file_id}:
+    get:
+      summary: Get File Info
+      description: Gets information about a file. Mirror for [files.info](https://api.slack.com/methods/files.info)
+      parameters:
+        - name: file_id
+          in: path
+          required: true
+          schema:
+            type: string
+          example: F07PV2SSJ64
+      responses:
+        '200':
+          description: Successful response
+
+  /usergroup/{usergroup_id}:
+    get:
+      summary: Get Usergroup Info
+      description: Retrieve information about a usergroup. Fetched on the start of the server. Mirror for [usergroups.list](https://api.slack.com/methods/usergroups.list)
+      parameters:
+        - name: usergroup_id
+          in: path
+          required: true
+          schema:
+            type: string
+          example: S06QGQG6FG8
+      responses:
+        '200':
+          description: Successful response
+
+  /emoji/{emoji_name}:
+    get:
+      summary: Get Emoji URL
+      description: "Gets URL from an emoji name (custom emoji only). Returns :alibaba-question: if the emoji isn’t found. Mirror for [emoji.list](https://api.slack.com/methods/emoji.list)"
+      parameters:
+        - name: emoji_name
+          in: path
+          required: true
+          schema:
+            type: string
+          example: aga-transparent
+      responses:
+        '200':
+          description: Successful response
+
+components: {}
