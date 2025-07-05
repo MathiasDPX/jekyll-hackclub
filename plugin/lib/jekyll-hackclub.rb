@@ -3,6 +3,7 @@ require_relative "./tags/mentions"
 require_relative "./tags/user-tag"
 require_relative "./tags/channel-tag"
 require_relative "./tags/usergroup-tag"
+require_relative "./tags/profile-pic"
 require_relative "./tags/file"
 
 require_relative "./tags/parser"

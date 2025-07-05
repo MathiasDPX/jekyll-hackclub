@@ -23,6 +23,15 @@ No args: {% file F07PV2SSJ64 %}<br>
 Permalink: <code>{% file F07PV2SSJ64 ; permalink %}</code><br>
 with pipe: <code>{% file F07PV2SSJ64 ; title ; [0:-6] | downcase %}
 
+## Profile pictures
+<details>
+    <summary>Click to open/close</summary>
+    original resolution<br>
+    {% profilepic U080HHYN0JD %}<br>
+    48px<br>
+    {% profilepic U080HHYN0JD@48 %}
+</details>
+
 ## Raw user
 name (root key): <code>{% user U080HHYN0JD ; name %}</code><br>
 profile.pronouns (nested key): <code>{% user U080HHYN0JD ; profile.pronouns %}</code><br>
