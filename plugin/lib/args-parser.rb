@@ -21,7 +21,7 @@ module ArgsParser
             elsif ArraysManipulation.respond_to?(func)
                 value = ArraysManipulation.public_send(func, value, args)
             else
-                raise ArgumentError, "Unkown function '#{func}'"
+                raise ArgumentError, "Unknown function '#{func}'"
             end
         end
         value
