@@ -1,4 +1,5 @@
 from flask import Flask, abort, redirect, jsonify
+from slack_sdk.errors import *
 from slack_sdk import WebClient
 from dotenv import load_dotenv
 from flask_cors import CORS
@@ -17,6 +18,15 @@ usergroups = {}
 for usergroup in client.usergroups_list().data.get("usergroups", []):
     usergroups[usergroup["id"]] = usergroup
 
+@app.errorhandler(Exception)
+def handle_error(e:Exception):
+    if isinstance(e, SlackClientError):
+        if isinstance(e, SlackApiError):
+            response = e.response
+            return response.data, response.status_code
+        
+    return {"ok": False, "error": "unknown error"}, 500
+
 @app.route("/", methods=["GET"])
 def index():
     return redirect("https://github.com/MathiasDPX/jekyll-hackclub/")
@@ -27,18 +37,13 @@ def users_page(uid: str):
     data = cache.get(key)
 
     if data is not None:
-        if isinstance(data, int):
-            abort(data)
+        if isinstance(data, Exception):
+            raise data
         return jsonify(data)
 
-    try:
-        response = client.users_info(user=uid).data
-    except Exception:
-        cache.set(key, 500)
-        abort(500)
-    else:
-        cache.set(key, response)
-        return jsonify(response)
+    response = client.users_info(user=uid).data
+    cache.set(key, response)
+    return jsonify(response)
 
 @app.route("/files.info/<fid>", methods=["GET"])
 def files_page(fid: str):
@@ -46,18 +51,13 @@ def files_page(fid: str):
     data = cache.get(key)
 
     if data is not None:
-        if isinstance(data, int):
-            abort(data)
+        if isinstance(data, Exception):
+            raise data
         return jsonify(data)
     
-    try:
-        response = client.files_info(file=fid).data
-    except Exception:
-        cache.set(key, 500)
-        abort(500)
-    else:
-        cache.set(key, response)
-        return jsonify(response)
+    response = client.files_info(file=fid).data
+    cache.set(key, response)
+    return jsonify(response)
 
 @app.route("/conversations.info/<cid>", methods=["GET"])
 def channels_page(cid: str):
@@ -65,18 +65,13 @@ def channels_page(cid: str):
     data = cache.get(key)
 
     if data is not None:
-        if isinstance(data, int):
-            abort(data)
+        if isinstance(data, Exception):
+            raise data
         return jsonify(data)
     
-    try:
-        response = client.conversations_info(channel=cid).data
-    except Exception:
-        cache.set(key, 500)
-        abort(500)
-    else:
-        cache.set(key, response)
-        return jsonify(response)
+    response = client.conversations_info(channel=cid).data
+    cache.set(key, response)
+    return jsonify(response)
 
 @app.route("/emoji/<eid>", methods=["GET"])
 def emoji_page(eid: str):
