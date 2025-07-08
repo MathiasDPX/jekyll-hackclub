@@ -31,6 +31,10 @@ def handle_error(e:Exception):
 def index():
     return redirect("https://github.com/MathiasDPX/jekyll-hackclub/")
 
+@app.route("/status", methods=["GET"])
+def status():
+    return "ok", 200
+
 @app.route("/users.info/<uid>", methods=["GET"])
 def users_page(uid: str):
     key = f"users.info#{uid}"
