@@ -1,6 +1,17 @@
+"""
+Cache manager module providing TTL-based caching functionality.
+
+This module implements a simple in-memory cache with time-to-live (TTL) support.
+"""
 import time
 
 class Cache:
+    """
+    A simple TTL-based cache implementation.
+    
+    This class provides basic caching functionality with automatic expiration
+    of entries based on a configurable time-to-live (TTL) value.
+    """
     def __init__(self, ttl=3600):
         """
         Initialize a TTL-based cache.
@@ -26,8 +37,8 @@ class Cache:
             value, timestamp = item
             if time.time() - timestamp < self.ttl:
                 return value
-            else:
-                self.store.pop(key, None)
+
+            return self.store.pop(key, None)
         return None
 
     def set(self, key, value):
