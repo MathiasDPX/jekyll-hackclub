@@ -18,6 +18,7 @@ client = WebClient(os.environ.get("SLACK_BOT_TOKEN"))
 
 cache = Cache(ttl=int(os.getenv("CACHE_TTL", "3600")))
 
+
 def get_emojis():
     """
     Get the list of emojis from Slack API with caching
@@ -28,16 +29,18 @@ def get_emojis():
         return data
 
     data = client.emoji_list().data.get("emoji", {})
-    cache.set(key, data, ttl=7200) # 2 hours
+    cache.set(key, data, ttl=7200)  # 2 hours
     return data
+
 
 usergroups = {}
 
 for usergroup in client.usergroups_list().data.get("usergroups", []):
     usergroups[usergroup["id"]] = usergroup
 
+
 @app.errorhandler(Exception)
-def handle_error(e:Exception):
+def handle_error(e: Exception):
     """
     Common error handler for all routes
     """
@@ -49,12 +52,14 @@ def handle_error(e:Exception):
 
     return {"ok": False, "error": "unknown error"}, 500
 
+
 @app.route("/", methods=["GET"])
 def index():
     """
     Redirect to the repository
     """
     return redirect("https://github.com/MathiasDPX/jekyll-hackclub/")
+
 
 @app.route("/status", methods=["GET"])
 def status():
@@ -63,14 +68,15 @@ def status():
     """
     return "ok", 200
 
+
 @app.route("/users.info/<uid>", methods=["GET"])
 def users_page(uid: str):
     """
     Get user information from Slack API with caching
-    
+
     Args:
         uid (str): Slack user ID
-        
+
     Returns:
         (dict) User information
     """
@@ -86,14 +92,15 @@ def users_page(uid: str):
     cache.set(key, response)
     return jsonify(response)
 
+
 @app.route("/files.info/<fid>", methods=["GET"])
 def files_page(fid: str):
     """
     Get file information from Slack API with caching
-    
+
     Args:
         fid (str): Slack file ID
-        
+
     Returns:
         (dict) File information
     """
@@ -109,14 +116,15 @@ def files_page(fid: str):
     cache.set(key, response)
     return jsonify(response)
 
+
 @app.route("/conversations.info/<cid>", methods=["GET"])
 def channels_page(cid: str):
     """
     Get conversation/channel information from Slack API with caching
-    
+
     Args:
         cid (str): Slack conversation/channel ID
-        
+
     Returns:
         (dict) Conversation information
     """
@@ -132,43 +140,43 @@ def channels_page(cid: str):
     cache.set(key, response)
     return jsonify(response)
 
+
 @app.route("/emoji/<eid>", methods=["GET"])
 def emoji_page(eid: str):
     """
     Get emoji URL from Slack workspace
-    
+
     Args:
         eid (str): Emoji name/ID (with or without colons)
-        
+
     Returns:
         (str) URL of the emoji or default question mark emoji
     """
     eid = eid.strip(":")
     url = get_emojis().get(eid) or get_emojis().get("alibaba-question")
-    
-    req = requests.get(url)
+
+    req = requests.get(url, timeout=5)
     contenttype = req.headers.get("content-type")
-    
+
     if not contenttype.startswith("image/"):
         return abort(404)
-    
-    return Response(
-        req.content, 
-        mimetype=contenttype
-    )
-    
+
+    return Response(req.content, mimetype=contenttype)
+
+
 @app.route("/usergroup/<gid>", methods=["GET"])
 def usergroup_page(gid: str):
     """
     Get usergroup information from cached Slack API data
-    
+
     Args:
         gid (str): Slack usergroup ID
-        
+
     Returns:
         (dict) usergroup information or empty dict if not found
     """
     return usergroups.get(gid, {})
+
 
 if __name__ == "__main__":
     app.run()
