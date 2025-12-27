@@ -4,7 +4,7 @@ require "uri"
 
 module HackclubRequest
     DEFAULT_EMOJI = "https://emoji.slack-edge.com/T0266FRGM/alibaba-question/c5ba32ce553206b8.png" # :alibaba-question:
-    @host = Jekyll.configuration({})['HACKCLUB_API'] || "https://slack.mathias.hackclub.app"
+    @host = Jekyll.configuration({})['HACKCLUB_API'] || "https://hackclub.mathiasd.fr"
 
     class << self
         attr_accessor :host
