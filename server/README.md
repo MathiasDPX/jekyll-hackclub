@@ -13,4 +13,4 @@ Currently supported methods:
 - [OpenAPI](https://raw.githubusercontent.com/MathiasDPX/jekyll-hackclub/refs/heads/master/server/docs/openapi.yml)
 
 ## Instances
-Nest: `slack.mathias.hackclub.app`
+[MathiasDPX](https://github.com/MathiasDPX): `hackclub.mathiasd.fr`
