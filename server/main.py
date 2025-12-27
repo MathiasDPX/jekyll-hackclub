@@ -3,7 +3,8 @@ Main entrypoint for the Slack bridge
 """
 
 import os
-from flask import Flask, redirect, jsonify
+import requests
+from flask import Flask, redirect, jsonify, abort, Response
 from slack_sdk.errors import SlackClientError, SlackApiError
 from slack_sdk import WebClient
 from dotenv import load_dotenv
@@ -16,7 +17,20 @@ CORS(app)
 client = WebClient(os.environ.get("SLACK_BOT_TOKEN"))
 
 cache = Cache(ttl=int(os.getenv("CACHE_TTL", "3600")))
-emojis = client.emoji_list().data.get("emoji", {})
+
+def get_emojis():
+    """
+    Get the list of emojis from Slack API with caching
+    """
+    key = "emojis"
+    data = cache.get(key)
+    if data is not None:
+        return data
+
+    data = client.emoji_list().data.get("emoji", {})
+    cache.set(key, data, ttl=7200) # 2 hours
+    return data
+
 usergroups = {}
 
 for usergroup in client.usergroups_list().data.get("usergroups", []):
@@ -130,11 +144,19 @@ def emoji_page(eid: str):
         (str) URL of the emoji or default question mark emoji
     """
     eid = eid.strip(":")
-    return emojis.get(
-        eid,
-        "https://emoji.slack-edge.com/T0266FRGM/alibaba-question/c5ba32ce553206b8.png"
+    url = get_emojis().get(eid) or get_emojis().get("alibaba-question")
+    
+    req = requests.get(url)
+    contenttype = req.headers.get("content-type")
+    
+    if not contenttype.startswith("image/"):
+        return abort(404)
+    
+    return Response(
+        req.content, 
+        mimetype=contenttype
     )
-
+    
 @app.route("/usergroup/<gid>", methods=["GET"])
 def usergroup_page(gid: str):
     """

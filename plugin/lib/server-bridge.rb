@@ -27,9 +27,8 @@ module HackclubRequest
         return {}, nil
     end
 
-    def self.resolve_emoji(id)
-        _, res = make_request("/emoji/#{id.strip}")
-        res&.is_a?(Net::HTTPSuccess) ? res.body : DEFAULT_EMOJI
+    def self.get_emoji(id)
+        return "#{host}/emoji/#{id.strip}"
     end
 
     def self.raw_file(fileid)

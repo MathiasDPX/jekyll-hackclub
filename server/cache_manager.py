@@ -34,22 +34,26 @@ class Cache:
         """
         item = self.store.get(key)
         if item:
-            value, timestamp = item
-            if time.time() - timestamp < self.ttl:
+            value, timestamp, ttl = item
+            if time.time() - timestamp < ttl:
                 return value
 
             return self.store.pop(key, None)
         return None
 
-    def set(self, key, value):
+    def set(self, key, value, ttl=None):
         """
         Set a value in the cache.
 
         Args:
             key (str): The cache key.
             value: The value to store.
+            ttl (int, optional): Time-to-live in seconds for this entry. 
+                                Defaults to the cache's default TTL.
         """
-        self.store[key] = (value, time.time())
+        if ttl is None:
+            ttl = self.ttl
+        self.store[key] = (value, time.time(), ttl)
 
     def clear(self):
         """

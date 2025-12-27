@@ -3,7 +3,7 @@
 
 Gem::Specification.new do |spec|
     spec.name = "jekyll-hackclub"
-    spec.version = "1.5.0"
+    spec.version = "1.5.1"
     spec.authors = ["MathiasDPX"]
     spec.summary = "Jekyll plugin for HackClub"
     spec.licenses = ["MIT"]
