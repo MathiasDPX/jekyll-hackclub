@@ -3,27 +3,49 @@ require "json"
 require "uri"
 
 module HackclubRequest
-    DEFAULT_EMOJI = "https://emoji.slack-edge.com/T0266FRGM/alibaba-question/c5ba32ce553206b8.png" # :alibaba-question:
+    DEFAULT_EMOJI = "https://cdn.hackclub.com/019ce841-fe66-72e6-bb16-d57a93ac574f/alibaba-question.png" # :alibaba-question:
     @host = Jekyll.configuration({})['HACKCLUB_API'] || "https://hackclub.mathiasd.fr"
+    DEFAULT_RETRIES = 3
+    RETRYABLE_STATUS_CODES = [408, 425, 429, 500, 502, 503, 504].freeze
 
     class << self
         attr_accessor :host
     end
 
-    def self.make_request(path)
+    def self.make_request(path, retries: DEFAULT_RETRIES, base_delay: 0.25)
         uri = URI("#{host}#{path}")
-        req = Net::HTTP::Get.new(uri)
-        req['Referer'] = "jekyll-hackclub"
+        attempts = 0
 
-        res = Net::HTTP.start(uri.hostname, uri.port, use_ssl: uri.scheme == "https") do |http|
-            http.request(req)
+        while attempts < retries
+            attempts += 1
+
+            begin
+                req = Net::HTTP::Get.new(uri)
+                req['Referer'] = "jekyll-hackclub"
+
+                res = Net::HTTP.start(uri.hostname, uri.port, use_ssl: uri.scheme == "https", open_timeout: 3, read_timeout: 6) do |http|
+                    http.request(req)
+                end
+
+                if RETRYABLE_STATUS_CODES.include?(res.code.to_i)
+                    sleep(base_delay * attempts) if attempts < retries
+                    next
+                end
+
+                return JSON.parse(res.body), res
+            rescue JSON::ParserError
+                return {}, res
+            rescue => e
+                if attempts < retries
+                    sleep(base_delay * attempts)
+                    next
+                end
+
+                warn "Request to #{uri} failed after #{attempts} attempts: #{e}"
+                return {}, nil
+            end
         end
 
-        return JSON.parse(res.body), res
-    rescue JSON::ParserError
-        return {}, res
-    rescue => e
-        warn "Request to #{uri} failed: #{e}"
         return {}, nil
     end
 
