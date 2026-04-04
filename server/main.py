@@ -141,6 +141,14 @@ def channels_page(cid: str):
     return jsonify(response)
 
 
+@app.route("/emojis", methods=["GET"])
+def emojis_page():
+    """
+    Get emojis URLs from Slack workspace
+    """
+    return get_emojis()
+
+
 @app.route("/emoji/<eid>", methods=["GET"])
 def emoji_page(eid: str):
     """
@@ -176,7 +184,6 @@ def usergroup_page(gid: str):
         (dict) usergroup information or empty dict if not found
     """
     return usergroups.get(gid, {})
-
 
 if __name__ == "__main__":
     app.run()
