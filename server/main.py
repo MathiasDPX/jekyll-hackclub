@@ -4,7 +4,7 @@ Main entrypoint for the Slack bridge
 
 import os
 import requests
-from flask import Flask, redirect, jsonify, abort, Response
+from flask import Flask, redirect, jsonify, abort, Response, request
 from slack_sdk.errors import SlackClientError, SlackApiError
 from slack_sdk import WebClient
 from dotenv import load_dotenv
@@ -91,6 +91,43 @@ def users_page(uid: str):
     response = client.users_info(user=uid).data
     cache.set(key, response)
     return jsonify(response)
+
+@app.route("/profile.picture/<uid>", methods=["GET"])
+def profile_picture(uid: str):
+    """
+    Get user profile picture from Slack API
+
+    Args:
+        uid (str): Slack user id
+
+    Returns:
+        (image) Profile profile
+    """
+    key = f"users.info#{uid}"
+    data = cache.get(key)
+
+    if data is not None:
+        if isinstance(data, Exception):
+            raise data
+    else:
+        response = client.users_info(user=uid).data
+        data = response
+        cache.set(key, response)
+
+    quality = request.args.get('q', default="original")
+    try:
+        url = data['user']['profile']['image_' + quality]
+    except:
+        return abort(404)
+
+    req = requests.get(url, timeout=5)
+    contenttype = req.headers.get("content-type")
+
+    if not contenttype.startswith("image/"):
+        return abort(404)
+
+    return Response(req.content, mimetype=contenttype)
+
 
 
 @app.route("/files.info/<fid>", methods=["GET"])

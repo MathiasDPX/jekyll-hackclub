@@ -10,15 +10,14 @@ module Jekyll
                 data = HackclubRequest.raw_user(id)
                 @resolution = Regexp.last_match(2) || "original"
 
-                @img_url = data.dig("user", "profile", "image_"+@resolution)
-                @name = data.dig("user", "name")
+                @img_url = HackclubRequest.get_pfp_url(id, @resolution)
             else
                 raise ArgumentError, "Invalid profilepic tag format: #{content}"
             end
         end
 
         def render(context)
-            %Q{<img src="#{@img_url}" title="#{@name}'s profile picture" alt="#{@name}'s profile picture" class="hackclub-pfp res-#{@resolution}">}
+            %Q{<img src="#{@img_url}" title="Slack profile picture" alt="Slack profile picture" class="hackclub-pfp res-#{@resolution}">}
         end
     end
 

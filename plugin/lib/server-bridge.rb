@@ -49,8 +49,12 @@ module HackclubRequest
         return {}, nil
     end
 
-    def self.get_emoji(id)
+    def self.get_emoji_url(id)
         return "#{host}/emoji/#{id.strip}"
+    end
+
+    def self.get_pfp_url(id, quality)
+        return "#{host}/profile.picture/#{id.strip}?q=#{quality}"
     end
 
     def self.raw_file(fileid)

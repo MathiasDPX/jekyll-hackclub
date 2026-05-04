@@ -6,7 +6,7 @@ module Jekyll
         def initialize(tagName, content, tokens)
             super
             @id = content.gsub(/\A:+|:+\z/, '').strip
-            @img_url = HackclubRequest.get_emoji(@id)
+            @img_url = HackclubRequest.get_emoji_url(@id)
         end
 
         def render(context)

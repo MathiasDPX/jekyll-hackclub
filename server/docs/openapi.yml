@@ -5,7 +5,7 @@ info:
   version: "1.0.0"
 
 servers:
-  - url: https://slack.mathias.hackclub.app
+  - url: https://hackclub.mathiasd.fr
 
 paths:
   /users.info/{user_id}:
@@ -70,8 +70,8 @@ paths:
 
   /emoji/{emoji_name}:
     get:
-      summary: Get Emoji URL
-      description: "Gets URL from an emoji name (custom emoji only). Returns :alibaba-question: if the emoji isn’t found. Mirror for [emoji.list](https://api.slack.com/methods/emoji.list)"
+      summary: Get Emoji
+      description: "Gets image from an emoji name (custom emoji only). Returns :alibaba-question: if the emoji isn’t found. Mirror for [emoji.list](https://api.slack.com/methods/emoji.list)"
       parameters:
         - name: emoji_name
           in: path
@@ -82,5 +82,27 @@ paths:
       responses:
         '200':
           description: Successful response
+
+  /profile.picture/{user_id}:
+    get:
+      summary: Get Profile Picture Image
+      description: "Gets a profile picture image from a user user_id"
+      parameters:
+        - name: user_id
+          in: path
+          required: true
+          schema:
+            type: string
+          example: U080HHYN0JD
+        - name: q
+          in: query
+          schema:
+            type: string
+            enum: ["original", "1024", "512", "192", "72", "48", "32", "24"]
+            default: "original"
+          description: Image size
+      responses:
+        '200':
+          description: Successful resposne
 
 components: {}
