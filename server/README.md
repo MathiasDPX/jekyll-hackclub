@@ -1,4 +1,7 @@
 # Server
+
+![GitHub Actions Workflow Status](https://img.shields.io/github/actions/workflow/status/MathiasDPX/jekyll-hackclub/push-image.yml?label=docker%20image)
+
 A Flask server used for querying Slack API without requiring user to setup a bot.
 
 Currently supported methods:

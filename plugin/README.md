@@ -1,6 +1,7 @@
 # jekyll-hackclub
 ![Gem Downloads](https://img.shields.io/gem/dt/jekyll-hackclub?label=downloads)
 ![Gem Version](https://img.shields.io/gem/v/jekyll-hackclub?label=latest)
+![GitHub Actions Workflow Status](https://img.shields.io/github/actions/workflow/status/MathiasDPX/jekyll-hackclub/gem-push.yml?label=gem%20push)
 
 This jekyll plugin can resolve channel id / user id to a \<a> link
 

@@ -1,5 +1,9 @@
 # jekyll-hackclub
 ![Gem Downloads](https://img.shields.io/gem/dt/jekyll-hackclub?label=downloads)
+![GitHub Actions Workflow Status](https://img.shields.io/github/actions/workflow/status/MathiasDPX/jekyll-hackclub/gem-push.yml?label=gem%20push)
+![GitHub Actions Workflow Status](https://img.shields.io/github/actions/workflow/status/MathiasDPX/jekyll-hackclub/jekyll-gh-pages.yml?label=demo%20deployment)
+![GitHub Actions Workflow Status](https://img.shields.io/github/actions/workflow/status/MathiasDPX/jekyll-hackclub/push-image.yml?label=docker%20image)
+
 
 The repository is split in 3 folders:
 - `site` is a template site for displaying jekyll-hackclub possibilities, it uses the plugin from the plugin folder and not the plugin from RubyGems
