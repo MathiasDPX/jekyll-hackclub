@@ -11,3 +11,20 @@ The repository is split in 3 folders:
 - `server` is a Flask server for resolving id to name without needing user to have their own bot
 
 Better documentation can be found in their respective folders
+
+## Installing the plugin
+
+Add the gem to your `Gemfile`:
+
+```ruby
+# Gemfile
+gem "jekyll-hackclub"
+```
+
+Then enable it in `_config.yml`:
+
+```yml
+# _config.yml
+plugins:
+  - jekyll-hackclub
+```
